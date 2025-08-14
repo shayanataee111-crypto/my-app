@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>عملکرد انجمن نیو کونگ فو استان‌ها — v8.3</title>
+<meta name="theme-color" content="#0b0b0c">
+<style>
+:root{--bg:#0b0b0c; --fg:#f2f2f3; --muted:#b9bdc7; --card:#141416; --border:#26262a;
+  --accent:#f59e0b; --accent2:#fbbf24; --btn:#1d1d20; --btnfg:#fff; --input:#0e0e10; --ring:0 0 0 3px rgba(245,158,11,.35);}
+.theme-dark{ --bg:#0b0b0c; --fg:#f2f2f3; --muted:#c0c0c3; --card:#141416; --border:#26262a; --accent:#f59e0b; --accent2:#fbbf24; --btn:#1d1d20; --btnfg:#fff; --input:#0e0e10; --ring:0 0 0 3px rgba(245,158,11,.35); }
+.theme-light{ --bg:#f7f7f9; --fg:#141416; --muted:#6b7280; --card:#ffffff; --border:#e7e7ea; --accent:#b45309; --accent2:#d97706; --btn:#1f2937; --btnfg:#fff; --input:#f1f5f9; --ring:0 0 0 3px rgba(185,99,14,.25); }
+.theme-emerald{ --bg:#071a16; --fg:#e9fff6; --muted:#a6ead3; --card:#0c2a25; --border:#15453b; --accent:#10b981; --accent2:#34d399; --btn:#0b3d33; --btnfg:#e9fff6; --input:#071a16; --ring:0 0 0 3px rgba(16,185,129,.35); }
+.theme-royal{ --bg:#0f1333; --fg:#eef2ff; --muted:#c7d2fe; --card:#141a4c; --border:#1d256b; --accent:#6366f1; --accent2:#a5b4fc; --btn:#1d256b; --btnfg:#eef2ff; --input:#0f1333; --ring:0 0 0 3px rgba(99,102,241,.35); }
+.theme-crimson{ --bg:#200a0d; --fg:#fff1f2; --muted:#fecdd3; --card:#330f14; --border:#5c1b24; --accent:#ef4444; --accent2:#f87171; --btn:#5c1b24; --btnfg:#fff1f2; --input:#200a0d; --ring:0 0 0 3px rgba(239,68,68,.35); }
+.theme-ocean{ --bg:#031b2a; --fg:#e6f7ff; --muted:#b9e6ff; --card:#06263a; --border:#0f3a55; --accent:#06b6d4; --accent2:#22d3ee; --btn:#0b4a65; --btnfg:#e6f7ff; --input:#031b2a; --ring:0 0 0 3px rgba(2,132,199,.35); }
+.theme-amethyst{ --bg:#1a1024; --fg:#f5f3ff; --muted:#ddd6fe; --card:#241036; --border:#3b1c5b; --accent:#a855f7; --accent2:#c084fc; --btn:#3b1c5b; --btnfg:#f5f3ff; --input:#1a1024; --ring:0 0 0 3px rgba(168,85,247,.35); }
+.theme-coffee{ --bg:#1a130f; --fg:#fef3c7; --muted:#fcd34d; --card:#221913; --border:#3b2a1f; --accent:#d97706; --accent2:#f59e0b; --btn:#3b2a1f; --btnfg:#fef3c7; --input:#1a130f; --ring:0 0 0 3px rgba(217,119,6,.35); }
+.theme-slate{ --bg:#0f172a; --fg:#e2e8f0; --muted:#94a3b8; --card:#111827; --border:#1f2937; --accent:#64748b; --accent2:#94a3b8; --btn:#1f2937; --btnfg:#e2e8f0; --input:#0b1220; --ring:0 0 0 3px rgba(100,116,139,.35); }
+.theme-sunset{ --bg:#1a0f0d; --fg:#fff7ed; --muted:#fed7aa; --card:#241411; --border:#3b221c; --accent:#fb923c; --accent2:#fdba74; --btn:#3b221c; --btnfg:#fff7ed; --input:#1a0f0d; --ring:0 0 0 3px rgba(251,146,60,.35); }
+.theme-forest{ --bg:#0c1a12; --fg:#ecfdf5; --muted:#a7f3d0; --card:#0f261a; --border:#1a3a29; --accent:#22c55e; --accent2:#86efac; --btn:#1a3a29; --btnfg:#ecfdf5; --input:#0c1a12; --ring:0 0 0 3px rgba(34,197,94,.35); }
+.theme-rose{ --bg:#2a0f19; --fg:#fff1f2; --muted:#fecdd3; --card:#3a1222; --border:#5b1b33; --accent:#f472b6; --accent2:#fb7185; --btn:#5b1b33; --btnfg:#fff1f2; --input:#2a0f19; --ring:0 0 0 3px rgba(244,114,182,.35); }
+.theme-neon{ --bg:#070713; --fg:#e5e7eb; --muted:#c4b5fd; --card:#0b0b1a; --border:#1f1f3a; --accent:#22d3ee; --accent2:#a78bfa; --btn:#1f1f3a; --btnfg:#e5e7eb; --input:#070713; --ring:0 0 0 3px rgba(167,139,250,.35); }
+
+*{box-sizing:border-box} html,body{height:100%} body{margin:0; color:var(--fg);
+  background:
+    radial-gradient(900px 600px at 80% -10%,rgba(245,158,11,.12),transparent),
+    linear-gradient(180deg,var(--bg),#000);
+  font-family:Vazirmatn,system-ui,-apple-system,Segoe UI,Roboto,Tahoma,Arial,sans-serif}
+.header{position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:10px 16px; border-bottom:1px solid var(--border);
+  background:linear-gradient(180deg,rgba(20,20,22,.78),rgba(20,20,22,.42)); backdrop-filter:saturate(140%) blur(6px);}
+.brand{display:flex;gap:10px;align-items:center;font-weight:900}
+.logoWrap img{width:42px;height:42px;border-radius:10px;object-fit:cover;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.actions{display:flex;gap:8px;align-items:center}
+.select{border:1px solid var(--border);background:var(--input);color:var(--fg);padding:8px 12px;border-radius:10px}
+.btn{border:1px solid var(--border);background:linear-gradient(180deg,var(--btn),calc(var(--btn) + 6%));color:var(--btnfg);padding:10px 14px;border-radius:12px;font-weight:800;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.06);transition:.2s}
+.btn:hover{filter:brightness(1.08); box-shadow:0 12px 28px rgba(0,0,0,.35), 0 0 0 2px rgba(245,158,11,.15) inset}
+.btn:active{transform:translateY(1px)} .btn.ghost{background:transparent;color:var(--fg)}
+.container{max-width:1100px;margin:24px auto;padding:0 16px;display:grid;grid-template-columns:1fr;gap:16px}
+.card{background:linear-gradient(180deg,var(--card),rgba(255,255,255,.02));border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 16px 44px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.03)}
+h1{margin:0;font-size:18px} h2{margin:6px 0 14px 0;font-size:20px;color:var(--accent)}
+.label{font-weight:800;margin-bottom:6px;display:block}
+.input, textarea, select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--input);color:var(--fg);outline:none;transition:border .2s ease, box-shadow .2s ease, background .2s ease}
+.input:focus, textarea:focus, select:focus{box-shadow:var(--ring)}
+.input.error{border-color:#ef4444; box-shadow:0 0 0 3px rgba(239,68,68,.25)}
+.error-msg{color:#fecaca;font-size:12px;margin-top:4px;display:none}
+.error-msg.show{display:block}
+.grid{display:grid;gap:12px} .grid-2{grid-template-columns:1fr 1fr} @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+.small{color:var(--muted);font-size:12px} .table{width:100%;border-collapse:collapse} .table th,.table td{border-bottom:1px solid var(--border);padding:10px;text-align:right;vertical-align:top;white-space:nowrap}
+.table td:nth-child(6){white-space:normal}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:10px 0}
+.kpi{background:var(--input);border:1px solid var(--border);border-radius:12px;padding:12px}
+.hidden{display:none!important} .badge{display:inline-flex;align-items:center;gap:6px;background:var(--input);border:1px solid var(--border);border-radius:999px;padding:6px 10px;font-size:12px}
+footer{padding:26px 16px;text-align:center;color:var(--muted)}
+.tabbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px} .tab{padding:8px 12px;border-radius:12px;border:1px solid var(--border);background:transparent;cursor:pointer;font-weight:800;transition:all .2s}
+.tab.active{background:var(--accent);color:#0b0b0c; transform:translateY(-1px)}
+.tip{background:rgba(0,0,0,.2);border:1px dashed var(--border);border-radius:12px;padding:10px;margin-top:8px}
+.toast{position:fixed;bottom:20px;right:20px;background:#111827;color:#e5e7eb;padding:10px 14px;border:1px solid #374151;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.4);opacity:0;transform:translateY(8px);transition:.25s;z-index:50}
+.toast.show{opacity:1;transform:translateY(0)} .alert{margin-top:10px;border:1px solid var(--border);background:rgba(16,185,129,.15);color:#c0ffde;padding:10px 12px;border-radius:12px;display:none}
+.alert.show{display:block} canvas{width:100%;height:260px;background:transparent} .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:12px 0}
+.thumb{width:64px;height:48px;object-fit:cover;border-radius:8px;border:1px solid var(--border)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:60}
+.modal.show{display:flex} .modal .box{width:min(1000px,92vw);max-height:85vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px}
+.modal .box img, .modal .box video{max-width:100%;height:auto;margin:6px 0;border-radius:10px;border:1px solid var(--border)}
+.picker{position:relative} .picker .panel{position:absolute; z-index:20; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:10px; width:280px; box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.picker .row{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px} .picker .cell{ text-align:center;padding:6px;border:1px solid var(--border);border-radius:8px;cursor:pointer}
+.picker .cell:hover{background:var(--accent); color:#111} .picker .nav{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.badge.mono{font-family:monospace}
+#managerPanel .card{padding:14px}
+#allTable{display:block; overflow-x:auto}
+</style>
+</head>
+<body class="theme-dark">
+  <header class="header">
+    <div class="brand">
+      <div class="logoWrap"><img id="clubLogo" alt="لوگو انجمن"></div>
+      <h1 id="appTitle">عملکرد انجمن نیو کونگ فو استان‌ها</h1>
+    </div>
+    <div class="actions">
+      <span id="roleBadge" class="badge">نقش: نماینده</span>
+      <select id="themeSelect" class="select">
+        <option value="theme-dark">تیره</option>
+        <option value="theme-light">سفید</option>
+        <option value="theme-emerald">زمردی</option>
+        <option value="theme-royal">رویال</option>
+        <option value="theme-crimson">زرشکی</option>
+        <option value="theme-ocean">اقیانوسی</option>
+        <option value="theme-amethyst">آمتیست</option>
+        <option value="theme-coffee">قهوه‌ای</option>
+        <option value="theme-slate">اسلیت</option>
+        <option value="theme-sunset">سان‌ست</option>
+        <option value="theme-forest">فارست</option>
+        <option value="theme-rose">رز</option>
+        <option value="theme-neon">نئون</option>
+      </select>
+      <button id="roleBtn" class="btn ghost">تغییر نقش</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="card">
+      <div class="tabbar">
+        <button class="tab active" data-view="rep">پنل نماینده استان</button>
+        <button class="tab" data-view="mgr">پنل مدیر</button>
+      </div>
+
+      <div id="view-rep">
+        <h2>ارسال عملکرد روزانه</h2>
+        <div class="grid grid-2">
+          <div><label class="label" for="province">نام استان</label><input id="province" class="input" placeholder="مثلاً: تهران"><div id="e_province" class="error-msg">استان را وارد کنید</div></div>
+          <div><label class="label" for="city">نام شهر</label><input id="city" class="input" placeholder="مثلاً: ری"><div id="e_city" class="error-msg">شهر را وارد کنید</div></div>
+          <div><label class="label" for="committee">نام کمیته تخصصی</label><input id="committee" class="input" placeholder="مثلاً: کمیته داوری"><div id="e_committee" class="error-msg">کمیته را وارد کنید</div></div>
+          <div><label class="label" for="eventType">نوع رویداد</label><input id="eventType" class="input" placeholder="مثلاً: مسابقات نیمه آزاد"><div id="e_eventType" class="error-msg">نوع رویداد را وارد کنید</div></div>
+          <div class="picker">
+            <label class="label" for="jDate">تاریخ (شمسی) — مثل ۱۴۰۴/۰۵/۲۳ یا 1404-05-23</label>
+            <div class="grid grid-2">
+              <input id="jDate" class="input" placeholder="۱۴۰۴/۰۵/۲۳">
+              <button id="openPicker" class="btn ghost" type="button">انتخاب تاریخ</button>
+            </div>
+            <div id="datePanel" class="panel hidden">
+              <div class="nav">
+                <button id="prevMonth" class="btn ghost" type="button">ماه قبل</button>
+                <div id="monthLabel"></div>
+                <button id="nextMonth" class="btn ghost" type="button">ماه بعد</button>
+              </div>
+              <div class="row" id="daysHeader"></div>
+              <div class="row" id="daysGrid"></div>
+            </div>
+            <div id="e_jDate" class="error-msg">تاریخ شمسی معتبر وارد/انتخاب کنید</div>
+          </div>
+        </div>
+        <div class="grid">
+          <div><label class="label" for="desc">شرح رویداد</label><textarea id="desc" class="input" rows="4" placeholder="توضیحات تکمیلی رویداد"></textarea><div id="e_desc" class="error-msg">شرح رویداد را وارد کنید</div></div>
+          <div>
+            <label class="label" for="files">فایل‌ها (چندتایی)</label>
+            <input id="files" class="input" type="file" multiple accept="image/*,video/*,.doc,.docx,.pdf,.txt,.ppt,.pptx,.xls,.xlsx,.zip">
+            <div class="small">* می‌تونی چندتا فایل با هم انتخاب کنی (گالری/کتابخانه را باز کن).</div>
+            <div id="e_files" class="error-msg">حداقل یک فایل انتخاب کنید</div>
+          </div>
+        </div>
+        <div class="grid grid-2" style="margin-top:10px">
+          <button id="sendToManager" class="btn">ارسال به مدیر</button>
+          <button id="clearForm" class="btn ghost">پاک‌کردن فرم</button>
+        </div>
+        <div id="sendAlert" class="alert">✅ با موفقیت به مدیر ارسال شد.</div>
+        <div class="tip small">پس از کلیک «ارسال به مدیر»، گزارش در «صندوق مدیر» ذخیره می‌شود.</div>
+      </div>
+
+      <div id="view-mgr" class="hidden">
+        <h2>پنل مدیر</h2>
+        <div id="mgr-lock" class="card" style="background:transparent">
+          <div class="grid grid-2">
+            <div><label class="label" for="password">رمز عبور</label><input id="password" class="input" type="password" autocomplete="current-password"></div>
+            <div style="align-self:end"><button id="passwordBtn" class="btn">ورود</button></div>
+          </div>
+        </div>
+
+        <div id="managerPanel" class="hidden">
+          <div class="kpis">
+            <div class="kpi"><div class="small">تعداد کل گزارش‌ها</div><div id="kpiTotal" style="font-weight:900;font-size:22px">0</div></div>
+            <div class="kpi"><div class="small">تعداد استان‌های فعال</div><div id="kpiProvinces" style="font-weight:900;font-size:22px">0</div></div>
+            <div class="kpi"><div class="small">میانگین پیوست هر گزارش</div><div id="kpiAvgAtt" style="font-weight:900;font-size:22px">0</div></div>
+          </div>
+
+          <div class="card" style="margin-top:14px;background:transparent;border:1px dashed var(--border)">
+            <h3 style="margin-top:0">نمودارها</h3>
+            <div class="grid grid-2">
+              <div><div class="small">توزیع گزارش‌ها بر اساس استان</div><canvas id="chartProvince"></canvas></div>
+              <div><div class="small">توزیع کمیته‌های تخصصی</div><canvas id="chartCommittee"></canvas></div>
+            </div>
+            <div class="grid"><div><div class="small">روند زمانی گزارش‌ها (روزانه)</div><canvas id="chartTimeline"></canvas></div></div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between">
+              <h3 style="margin:0">لیست گزارش‌ها</h3>
+              <div style="display:flex;gap:8px">
+                <button id="exportCSV" class="btn ghost" title="خروجی اکسل (CSV)">خروجی اکسل (CSV)</button>
+                <button id="purgeAll" class="btn" title="حذف همه گزارش‌ها">حذف همه گزارش‌ها</button>
+              </div>
+            </div>
+            <div id="tableWrap" style="overflow-x:auto">
+            <table class="table" id="allTable">
+              <thead><tr><th>تاریخ (شمسی)</th><th>استان</th><th>شهر</th><th>کمیته</th><th>تصویر</th><th>پیوست‌ها</th><th>JSON</th><th>Word</th><th>گالری</th><th>حذف</th></tr></thead>
+              <tbody></tbody>
+            </table>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:14px">
+            <h3 style="margin-top:0">تنظیمات مدیر</h3>
+            <div class="grid grid-2">
+              <div><label class="label" for="oldPass">رمز فعلی</label><input id="oldPass" class="input" type="password" autocomplete="current-password"></div>
+              <div><label class="label" for="newPass">رمز جدید</label><input id="newPass" class="input" type="password" autocomplete="new-password"></div>
+              <div>
+                <label class="label" for="logoUrl">لوگو (URL)</label>
+                <input id="logoUrl" class="input" placeholder="آدرس تصویر لوگو">
+                <div class="small">یا فایل لوگو را بارگذاری کن:</div>
+                <input id="logoFile" type="file" class="input" accept="image/*">
+              </div>
+              <div><label class="label" for="appName">نام اپلیکیشن</label><input id="appName" class="input" placeholder="مثلاً: سامانه عملکرد استان‌ها"></div>
+            </div>
+            <div class="grid" style="margin-top:8px">
+              <button id="changePass" class="btn">ثبت رمز جدید</button>
+              <button id="saveBrand" class="btn ghost">ذخیره نام و لوگو</button>
+            </div>
+            <div class="small">* رمز به‌صورت امن (هش‌شده) ذخیره می‌شود.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="modal" class="modal"><div class="box"><div style="text-align:left"><button id="closeModal" class="btn ghost">بستن</button></div><div id="modalBody"></div></div></div>
+  <div id="toast" class="toast"></div>
+  <footer>© انجمن نیو کونگ فو — وب‌اپ عملکرد استان‌ها • v8.3</footer>
+
+<script>
+// Error catcher
+window.addEventListener('error', (e)=> toast('خطا: ' + (e?.message || 'نامشخص')) );
+window.addEventListener('unhandledrejection', (e)=> toast('خطای Promise: ' + (e?.reason || 'نامشخص')) );
+
+function hasLocalStorage(){ try{ const k='__t__'; localStorage.setItem(k,'1'); localStorage.removeItem(k); return true; }catch(e){ return false; } }
+const _mem = {store:{}};
+const store = hasLocalStorage() ?
+ { get:(k,d)=>{const v=localStorage.getItem(k); return v===null?d:v;}, set:(k,v)=>localStorage.setItem(k,v) } :
+ { get:(k,d)=> (k in _mem.store)?_mem.store[k]:d, set:(k,v)=>{_mem.store[k]=v;} };
+
+// Theme
+const themeSelect = document.getElementById('themeSelect');
+function applyTheme(name){ document.body.className=name; store.set('nkf_theme', name); themeSelect.value=name; }
+applyTheme(store.get('nkf_theme', 'theme-dark'));
+themeSelect.addEventListener('change', (e)=> applyTheme(e.target.value));
+
+// Branding
+const TITLE_KEY='nkf_app_title', LOGO_KEY='nkf_logo_url';
+const fallbackLogo = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNTllMGIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmYmJmMjQiLz48L2xpbmVhckdyYWRpZW50PjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0idXJsKCNnKSIgcng9IjEyIi8+PHRleHQgeD0iMzIiIHk9IjM2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEwIiBmaWxsPSIjMTExIj5MT0dPPC90ZXh0Pjwvc3ZnPg==';
+function loadBrand(){
+  const title = store.get(TITLE_KEY, 'عملکرد انجمن نیو کونگ فو استان‌ها');
+  const logo = store.get(LOGO_KEY, fallbackLogo);
+  document.getElementById('appTitle').textContent = title;
+  const img = document.getElementById('clubLogo'); img.crossOrigin="anonymous"; img.src = logo; img.onerror=()=>{ img.src=fallbackLogo; };
+  const nameInput = document.getElementById('appName'); if(nameInput) nameInput.value = title;
+  const logoInput = document.getElementById('logoUrl'); if(logoInput) logoInput.value = logo;
+}
+loadBrand();
+var saveBrandBtn = document.getElementById('saveBrand');
+if(saveBrandBtn){
+  saveBrandBtn.addEventListener('click', function(){
+    var newTitle = document.getElementById('appName').value.trim();
+    var newLogoUrl = document.getElementById('logoUrl').value.trim();
+    var logoFile = document.getElementById('logoFile').files[0];
+    if(newTitle){ store.set(TITLE_KEY, newTitle); document.getElementById('appTitle').textContent = newTitle; }
+    if(logoFile){
+      var fr = new FileReader();
+      fr.onload = function(){ store.set(LOGO_KEY, fr.result); document.getElementById('clubLogo').src = fr.result; toast('لوگو از فایل ذخیره شد'); };
+      fr.readAsDataURL(logoFile);
+    } else if(newLogoUrl){
+      store.set(LOGO_KEY, newLogoUrl); var img=document.getElementById('clubLogo'); img.src=newLogoUrl; img.onerror=function(){ img.src=fallbackLogo; };
+    }
+    if(!newTitle && !newLogoUrl && !logoFile) toast('مقداری وارد نشد');
+  });
+}
+
+// Tabs
+const tabs = document.querySelectorAll('.tab');
+const viewRep = document.getElementById('view-rep');
+const viewMgr = document.getElementById('view-mgr');
+tabs.forEach(function(t){ t.addEventListener('click', function(){ tabs.forEach(function(x){x.classList.remove('active')}); t.classList.add('active'); var v=t.dataset.view; viewRep.classList.toggle('hidden', v!=='rep'); viewMgr.classList.toggle('hidden', v!=='mgr'); document.getElementById('roleBadge').textContent = 'نقش: ' + (v==='rep'?'نماینده':'مدیر'); }); });
+document.getElementById('roleBtn').addEventListener('click',function(){ var isRep = !viewRep.classList.contains('hidden'); tabs[isRep?1:0].click(); });
+
+function toast(msg){ var t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(function(){t.classList.remove('show')},2600); }
+
+const INBOX = 'nkf_manager_inbox';
+function getInbox(){ try{ return JSON.parse(store.get(INBOX, '[]')) || []; } catch(e){ return []; } }
+function setInbox(v){ try{ store.set(INBOX, JSON.stringify(v)); } catch(e){ toast('ذخیره‌سازی در دسترس نیست'); } }
+
+// Password
+const PASS_HASH_KEY='nkf_admin_pass_hash';
+async function sha256(str){
+  try{ const enc=new TextEncoder().encode(str); const buf=await crypto.subtle.digest('SHA-256', enc); return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0')}).join(''); }
+  catch(e){ var h=0; for(var i=0;i<str.length;i++) h=((h<<5)-h)+str.charCodeAt(i); return ('00000000'+(h>>>0).toString(16)).slice(-8); }
+}
+(async function(){ if(!store.get(PASS_HASH_KEY, null)){ store.set(PASS_HASH_KEY, await sha256('2219')); } })();
+document.getElementById('passwordBtn').addEventListener('click', async function(){
+  var input = (document.getElementById('password').value||'').trim();
+  var hash = await sha256(input);
+  var correct = store.get(PASS_HASH_KEY, '');
+  if(hash === correct){ document.getElementById('mgr-lock').classList.add('hidden'); document.getElementById('managerPanel').classList.remove('hidden'); refreshManager(); toast('ورود موفق'); }
+  else{ toast('رمز اشتباه است'); }
+});
+document.getElementById('changePass').addEventListener('click', async function(){
+  var oldp = document.getElementById('oldPass').value, newp = document.getElementById('newPass').value;
+  if(!oldp || !newp){ toast('هر دو فیلد رمز لازم است'); return; }
+  var current = store.get(PASS_HASH_KEY, '');
+  if(await sha256(oldp) !== current){ toast('رمز فعلی نادرست است'); return; }
+  store.set(PASS_HASH_KEY, await sha256(newp)); document.getElementById('oldPass').value=''; document.getElementById('newPass').value=''; toast('رمز تغییر کرد');
+});
+
+/* Date conversion */
+function g2d(gy, gm, gd){var a=Math.floor((14-gm)/12);var y=gy+4800-a;var m=gm+12*a-3;return gd+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;}
+function d2g(jdn){var j=jdn+32044;var g=Math.floor(j/146097);var dg=j%146097;var c=Math.floor((Math.floor(dg/36524)+1)*3/4);var dc=dg-c*36524;var b=Math.floor(dc/1461);var db=dc%1461;var a=Math.floor((Math.floor(db/365)+1)*3/4);var da=db-a*365;var y=g*400+c*100+b*4+a;var m=Math.floor((da*5+308)/153)-2;var d=da-Math.floor((m+4)*153/5)+122;return [y-4800+Math.floor((m+2)/12),(m+2)%12+1,d+1];}
+function j2d(jy, jm, jd){jy=parseInt(jy,10);jm=parseInt(jm,10);jd=parseInt(jd,10);var epbase=jy-(jy>=0?474:473);var epyear=474+(epbase%2820);return jd+ (jm<=7?(jm-1)*31:(jm-7)*30+186)+ Math.floor((epyear*682-110)/2816)+ (epyear-1)*365+ Math.floor(epbase/2820)*1029983+ (1948320-1);}
+function d2j(jdn){var depoch=jdn-j2d(475,1,1);var cycle=Math.floor(depoch/1029983);var cyear=depoch%1029983;var ycycle; if(cyear===1029982){ycycle=2820;}else{var aux1=Math.floor(cyear/366);var aux2=cyear%366;ycycle=Math.floor((2134*aux1+2816*aux2+2815)/1028522)+aux1+1;}var jy=ycycle+2820*cycle+474;if(jy<=0)jy--;var yday=jdn-j2d(jy,1,1)+1;var jm,jd;if(yday<=186){jm=Math.ceil(yday/31);jd=yday-31*(jm-1);}else{jm=Math.ceil((yday-186)/30)+6;jd=yday-186-30*(jm-7);}return [jy,jm,jd];}
+function pad2(n){return n<10?'0'+n:''+n;}
+function normDigits(str){var map={'۰':'0','۱':'1','۲':'2','۳':'3','۴':'4','۵':'5','۶':'6','۷':'7','۸':'8','۹':'9','٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9'};return (str||'').replace(/[۰-۹٠-٩]/g,function(d){return map[d]||d;});}
+function parseJalali(str){str=normDigits((str||'').trim());var m=(str||'').match(/^(\d{3,4})[\/\-](\d{1,2})[\/\-](\d{1,2})$/); if(!m) return null; var jy=+m[1], jm=+m[2], jd=+m[3]; if(jm<1||jm>12) return null; var md=(jm<=6)?31:(jm<=11?30:29); if(jd<1||jd>md) return null; return [jy,jm,jd];}
+
+// DatePicker
+var monthNames=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+var week=['ش','ی','د','س','چ','پ','ج'];
+var jInput=document.getElementById('jDate'); var panel=document.getElementById('datePanel'); var lbl=document.getElementById('monthLabel'); var hg=document.getElementById('daysHeader'); var grid=document.getElementById('daysGrid');
+function renderHeader(){hg.innerHTML=''; week.forEach(function(w){ var s=document.createElement('div'); s.textContent=w; s.style.textAlign='center'; hg.appendChild(s); });}
+var today=new Date(); var curJ=d2j(g2d(today.getFullYear(), today.getMonth()+1, today.getDate())); var curYear=curJ[0], curMonth=curJ[1];
+function renderMonth(){
+  lbl.textContent=monthNames[curMonth-1]+' '+curYear; grid.innerHTML='';
+  var gStart=d2g(j2d(curYear,curMonth,1)); var first=new Date(gStart[0], gStart[1]-1, gStart[2]).getDay();
+  var shift=(first+1)%7;
+  for(var i=0;i<shift;i++){ var c=document.createElement('div'); grid.appendChild(c); }
+  var md=(curMonth<=6)?31:(curMonth<=11?30:29);
+  for(var d=1; d<=md; d++){ var cell=document.createElement('div'); cell.className='cell'; cell.textContent=d; cell.addEventListener('click',function(ev){ var day=ev.target.textContent; jInput.value=curYear+'/'+pad2(curMonth)+'/'+pad2(day); panel.classList.add('hidden'); document.getElementById('e_jDate').classList.remove('show'); jInput.classList.remove('error'); }); grid.appendChild(cell); }
+}
+document.getElementById('openPicker').addEventListener('click',function(){ panel.classList.toggle('hidden'); renderHeader(); renderMonth(); });
+document.getElementById('prevMonth').addEventListener('click',function(){ curMonth--; if(curMonth<1){curMonth=12;curYear--;} renderMonth(); });
+document.getElementById('nextMonth').addEventListener('click',function(){ curMonth++; if(curMonth>12){curMonth=1;curYear++;} renderMonth(); });
+jInput.addEventListener('input', function(){ var ok=!!parseJalali(jInput.value); document.getElementById('e_jDate').classList.toggle('show', !ok); jInput.classList.toggle('error', !ok); });
+
+// Validation
+function setErr(id, show, msgId){ var el=document.getElementById(id); var em=document.getElementById(msgId); if(show){ el.classList.add('error'); if(em) em.classList.add('show'); } else { el.classList.remove('error'); if(em) em.classList.remove('show'); } }
+function validateForm(){ var ok=true;
+  [['province','e_province'], ['city','e_city'], ['committee','e_committee'], ['eventType','e_eventType'], ['desc','e_desc']].forEach(function(pair){ var id=pair[0], em=pair[1]; var v=document.getElementById(id).value.trim(); var bad=!v; setErr(id,bad,em); if(bad) ok=false; });
+  var jd=parseJalali(document.getElementById('jDate').value); var badDate=!jd; setErr('jDate', badDate, 'e_jDate'); if(badDate) ok=false;
+  var files=document.getElementById('files').files; var badFiles=(files.length===0); if(badFiles){ document.getElementById('e_files').classList.add('show'); } else { document.getElementById('e_files').classList.remove('show'); }
+  if(badFiles) ok=false;
+  return ok;
+}
+
+// Files
+function loadImageFromFile(file){ return new Promise(function(resolve,reject){ var fr=new FileReader(); fr.onload=function(){ var img=new Image(); img.onload=function(){resolve({img:img, type:file.type})}; img.onerror=reject; img.src=fr.result; }; fr.onerror=reject; fr.readAsDataURL(file); }); }
+function compressImage(img, type, maxDim, quality){ if(maxDim==null) maxDim=1600; if(quality==null) quality=0.85; var canvas=document.createElement('canvas'); var w=img.width,h=img.height; if(w>h&&w>maxDim){h=Math.round(h*maxDim/w);w=maxDim;} else if(h>=w&&h>maxDim){w=Math.round(w*maxDim/h);h=maxDim;} canvas.width=w; canvas.height=h; var ctx=canvas.getContext('2d'); ctx.drawImage(img,0,0,w,h); return canvas.toDataURL(type==='image/png'?'image/png':'image/jpeg',quality); }
+async function filesToData(fileList){
+  var out=[];
+  for(var i=0;i<fileList.length;i++){
+    var f=fileList[i];
+    if(f.type && f.type.startsWith('image/')){
+      try{
+        var o=await loadImageFromFile(f);
+        var data = compressImage(o.img, o.type);
+        out.push({name:f.name,type:(o.type||'image/jpeg'),size:f.size,data:data});
+      }catch(err){
+        var ab=await f.arrayBuffer(); var b64=btoa(String.fromCharCode.apply(null, new Uint8Array(ab))); out.push({name:f.name,type:f.type||'image/jpeg',size:f.size,data:'data:'+(f.type||'image/jpeg')+';base64,'+b64});
+      }
+    }else{
+      var ab2=await f.arrayBuffer(); var b642=btoa(String.fromCharCode.apply(null, new Uint8Array(ab2)));
+      out.push({name:f.name,type:f.type||'application/octet-stream',size:f.size,data:'data:'+(f.type||'application/octet-stream')+';base64,'+b642});
+    }
+  }
+  return out;
+}
+
+// Helper to safely reset file input preserving attributes (multiple + accept)
+var FILE_ACCEPT = "image/*,video/*,.doc,.docx,.pdf,.txt,.ppt,.pptx,.xls,.xlsx,.zip";
+function resetFilesInput(){
+  var filesEl = document.getElementById('files');
+  var newInput = document.createElement('input');
+  newInput.id = 'files';
+  newInput.className = 'input';
+  newInput.type = 'file';
+  newInput.multiple = true;
+  newInput.setAttribute('accept', FILE_ACCEPT);
+  filesEl.parentNode.replaceChild(newInput, filesEl);
+}
+
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,8); }
+document.getElementById('sendToManager').addEventListener('click', async function(){
+  try{
+    if(!validateForm()){ toast('ارسال ممکن نیست: لطفاً فیلدها را تکمیل و حداقل یک فایل انتخاب کنید'); return; }
+    var province = document.getElementById('province').value.trim();
+    var city = document.getElementById('city').value.trim();
+    var committee = document.getElementById('committee').value.trim();
+    var eventType = document.getElementById('eventType').value.trim();
+    var jDateStr = document.getElementById('jDate').value.trim();
+    var jd = parseJalali(jDateStr);
+    var jKey = jd[0]*10000 + jd[1]*100 + jd[2];
+    var desc = document.getElementById('desc').value.trim();
+    var filesEl = document.getElementById('files');
+    var attachments = await filesToData(filesEl.files);
+    var report = {id:uid(), province:province, city:city, committee:committee, eventType:eventType, jDate:jDateStr, jKey:jKey, desc:desc, attachments:attachments, createdAt:new Date().toISOString()};
+    var inbox = getInbox(); inbox.unshift(report); setInbox(inbox);
+    ['province','city','committee','eventType','jDate','desc'].forEach(function(id){document.getElementById(id).value=''});
+    resetFilesInput();
+    document.getElementById('sendAlert').classList.add('show'); setTimeout(function(){document.getElementById('sendAlert').classList.remove('show')}, 3000);
+    toast('با موفقیت به مدیر ارسال شد');
+    if(!document.getElementById('managerPanel').classList.contains('hidden')){ refreshManager(); }
+  }catch(err){ toast('خطا در ارسال: '+ (err?.message || err)); }
+});
+document.getElementById('clearForm').addEventListener('click',function(){
+  ['province','city','committee','eventType','jDate','desc'].forEach(function(id){document.getElementById(id).value=''});
+  resetFilesInput();
+  toast('فرم پاک شد');
+});
+
+// Manager
+function refreshManager(){
+  var rows = getInbox();
+  document.getElementById('kpiTotal').textContent = rows.length;
+  document.getElementById('kpiProvinces').textContent = new Set(rows.map(function(r){return r.province})).size;
+  var avg = rows.length? (rows.reduce(function(a,b){return a+(b.attachments?b.attachments.length:0)},0)/rows.length).toFixed(1):0;
+  document.getElementById('kpiAvgAtt').textContent = avg;
+  var tbody = document.querySelector('#allTable tbody'); tbody.innerHTML='';
+  rows.forEach(function(r){
+    var tr = document.createElement('tr');
+    var imgAtt = (r.attachments||[]).find(function(a){return a.type && a.type.startsWith('image/')});
+    var imgHtml = imgAtt ? '<img class="thumb" src="'+imgAtt.data+'" alt="thumb">' : '<span class="small">بدون تصویر</span>';
+    var hasAtt = (r.attachments||[]).length>0;
+    tr.innerHTML = '<td>'+ (r.jDate||'') +'</td><td>'+r.province+'</td><td>'+r.city+'</td><td>'+r.committee+'</td>' +
+                    '<td>'+imgHtml+'</td>' +
+                    '<td>'+ (hasAtt?'<button class="btn ghost" data-view="'+r.id+'">مشاهده/دانلود</button>':'—') +'</td>' +
+                    '<td><button class="btn ghost" data-json="'+r.id+'">JSON</button></td>' +
+                    '<td><button class="btn" data-doc="'+r.id+'">Word</button></td>' +
+                    '<td>'+ (hasAtt?'<button class="btn ghost" data-gallery="'+r.id+'">دانلود گالری</button>':'—') +'</td>' +
+                    '<td><button class="btn ghost" data-del="'+r.id+'">حذف</button></td>';
+    tbody.appendChild(tr);
+  });
+  tbody.querySelectorAll('button[data-json]').forEach(function(b){ b.addEventListener('click', function(){downloadJSON(b.dataset.json)})});
+  tbody.querySelectorAll('button[data-doc]').forEach(function(b){ b.addEventListener('click', function(){downloadDOC(b.dataset.doc)})});
+  tbody.querySelectorAll('button[data-view]').forEach(function(b){ b.addEventListener('click', function(){openModal(b.dataset.view)})});
+  tbody.querySelectorAll('button[data-del]').forEach(function(b){ b.addEventListener('click', function(){deleteReport(b.dataset.del)})});
+  tbody.querySelectorAll('button[data-gallery]').forEach(function(b){ b.addEventListener('click', function(){downloadGalleryHTML(b.dataset.gallery)})});
+  drawCharts(rows);
+}
+
+// Delete single
+function deleteReport(id){
+  if(!confirm('این گزارش حذف شود؟')) return;
+  var rows = getInbox().filter(function(r){return r.id!==id});
+  setInbox(rows); refreshManager(); toast('گزارش حذف شد');
+}
+
+// Purge all
+document.addEventListener('click', function(e){
+  if(e.target && e.target.id === 'purgeAll'){
+    if(confirm('همه گزارش‌ها حذف شوند؟ این عملیات قابل بازگشت نیست.')){
+      setInbox([]); refreshManager(); toast('همه گزارش‌ها حذف شد');
+    }
+  }
+});
+
+// Modal
+function openModal(id){
+  var r = getInbox().find(function(x){return x.id===id});
+  var body=document.getElementById('modalBody'); body.innerHTML='';
+  if(!r||!(r.attachments||[]).length){ body.innerHTML='<div class="small">پیوستی وجود ندارد</div>'; }
+  else {
+    r.attachments.forEach(function(a,idx){
+      if(a.type && a.type.startsWith('image/')){
+        var img=document.createElement('img'); img.src=a.data; body.appendChild(img);
+      }else if(a.type && a.type.startsWith('video/')){
+        var v=document.createElement('video'); v.src=a.data; v.controls=true; body.appendChild(v);
+      }else{
+        var d=document.createElement('div'); d.className='small'; d.textContent='فایل: '+a.name; body.appendChild(d);
+      }
+      var dl=document.createElement('a'); dl.className='badge mono'; dl.textContent='دانلود '+(a.name||('file'+idx)); dl.href=a.data; dl.download=a.name||('file'+idx); dl.style.marginBottom='8px'; body.appendChild(dl);
+    });
+  }
+  document.getElementById('modal').classList.add('show');
+}
+document.getElementById('closeModal').addEventListener('click',function(){document.getElementById('modal').classList.remove('show')});
+document.getElementById('modal').addEventListener('click',function(e){ if(e.target.id==='modal') document.getElementById('modal').classList.remove('show'); });
+
+// Gallery HTML
+function downloadGalleryHTML(id){
+  var r = getInbox().find(function(x){return x.id===id}); if(!r){ toast('گزارش یافت نشد'); return; }
+  var items = (r.attachments||[]).map(function(a){
+    if(a.type && a.type.startsWith('image/')) return '<img src="'+a.data+'" style="max-width:100%;height:auto;margin:8px 0;border:1px solid #ddd;border-radius:8px" />';
+    if(a.type && a.type.startsWith('video/')) return '<video src="'+a.data+'" controls style="width:100%;margin:8px 0;border:1px solid #ddd;border-radius:8px"></video>';
+    return '<div>فایل: '+a.name+' ('+(a.type||'file')+')</div>';
+  }).join('');
+  var html = '\ufeff<html><head><meta charset="utf-8"><title>گالری پیوست‌ها</title></head><body dir="rtl" style="font-family:Tahoma,Arial"><h3>گالری پیوست‌های '+r.province+' - '+r.jDate+'</h3>'+items+'</body></html>';
+  var blob = new Blob([html], {type:'text/html;charset=utf-8'});
+  triggerDownload(blob, 'گالری_'+r.province+'_'+r.jDate+'.html');
+}
+
+// Downloads helper
+function triggerDownload(blob, filename){
+  try{
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.style.display='none'; a.href = url; a.download = filename || 'file';
+    document.body.appendChild(a);
+    var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    if(isSafari){ a.target = '_blank'; }
+    a.click();
+    setTimeout(function(){ document.body.removeChild(a); URL.revokeObjectURL(url); }, 2000);
+  }catch(e){
+    try{ var fr = new FileReader(); fr.onload = function(){ window.open(fr.result, '_blank'); }; fr.readAsDataURL(blob); }
+    catch(e2){ toast('خطا در دانلود: '+ (e2?.message || e2)); }
+  }
+}
+
+// Export CSV
+document.getElementById('exportCSV').addEventListener('click', function(){
+  var rows = getInbox();
+  if(!rows.length){ toast('گزارشی برای خروجی وجود ندارد'); return; }
+  var header = ['تاریخ شمسی','استان','شهر','کمیته','نوع رویداد','شرح','تعداد پیوست','شناسه'];
+  var csvRows = [header.join(',')];
+  rows.forEach(function(r){
+    var cells = [r.jDate||'', r.province||'', r.city||'', r.committee||'', r.eventType||'', (r.desc||'').replace(/\n/g,' '), (r.attachments||[]).length, r.id];
+    csvRows.push(cells.map(function(v){return '"'+String(v).replace(/"/g,'""')+'"'}).join(','));
+  });
+  var bom = new Uint8Array([0xEF,0xBB,0xBF]);
+  var blob = new Blob([bom, csvRows.join('\r\n')], {type:'text/csv;charset=utf-8'});
+  triggerDownload(blob, 'گزارش‌ها.csv');
+});
+
+// JSON & Word
+function downloadJSON(id){
+  try{
+    var r = getInbox().find(function(x){return x.id===id}); if(!r){ toast('گزارش یافت نشد'); return; }
+    var bom=new Uint8Array([0xEF,0xBB,0xBF]);
+    var blob=new Blob([bom, JSON.stringify(r,null,2)],{type:'application/json;charset=utf-8'});
+    triggerDownload(blob, 'Report_'+r.province+'_'+r.jDate+'.json');
+  }catch(err){ toast('خطا در دانلود JSON: '+ (err?.message || err)); }
+}
+function downloadDOC(id){
+  try{
+    var r = getInbox().find(function(x){return x.id===id}); if(!r){ toast('گزارش یافت نشد'); return; }
+    var safe = function(s){ return (s||'').replace(/[&<>]/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]); }); };
+    var line1 = 'برگزاری ('+safe(r.eventType)+') انجمن نیو کونگ فو ('+safe(r.province)+')';
+    var line2 = 'مورخ ('+safe(r.jDate)+')';
+    var mediaHtml = '';
+    (r.attachments||[]).forEach(function(att){
+      if(att.type && att.type.startsWith('image/')){
+        mediaHtml += '<div style="margin:10px 0"><img src="'+att.data+'" style="max-width:100%;height:auto"/></div>';
+      }
+    });
+    var html = '\ufeff<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>گزارش</title><style>body{font-family:Tahoma,Arial;direction:rtl;unicode-bidi:embed;line-height:1.9}</style></head><body dir="rtl"><h2 style="text-align:center">گزارش عملکرد رویداد</h2><p>'+line1+'</p><p>'+line2+'</p><p>شرح: '+safe(r.desc)+'</p><hr>'+ (mediaHtml || '<p>تصویری پیوست نشده است.</p>') +'</body></html>';
+    var blob = new Blob([html], {type:'application/msword;charset=utf-8'});
+    triggerDownload(blob, 'گزارش_'+r.province+'_'+r.jDate+'.doc');
+  }catch(err){ toast('خطا در دانلود Word: '+ (err?.message || err)); }
+}
+
+// Charts
+function prepCanvas(c){ var dpr=window.devicePixelRatio||1; var rect=c.getBoundingClientRect(); c.width=Math.round(rect.width*dpr); c.height=Math.round(rect.height*dpr); var ctx=c.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); return ctx;}
+function drawCharts(rows){ drawProvinceChart(rows); drawCommitteeChart(rows); drawTimelineChart(rows); }
+function drawProvinceChart(rows){
+  var c=document.getElementById('chartProvince'); var ctx=prepCanvas(c); var w=c.clientWidth, h=c.clientHeight, pad=30;
+  ctx.clearRect(0,0,w,h);
+  var counts={}; rows.forEach(function(r){ var k=r.province||'نامشخص'; counts[k]=(counts[k]||0)+1; });
+  var labels=Object.keys(counts), values=labels.map(function(k){return counts[k]}); var max=Math.max(1,values.length?Math.max.apply(null,values):1);
+  ctx.strokeStyle='rgba(255,255,255,.15)'; for(var y=0;y<=4;y++){ var yy=h-pad-(y/4)*(h-2*pad); ctx.beginPath(); ctx.moveTo(pad,yy); ctx.lineTo(w-pad,yy); ctx.stroke(); }
+  ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--accent');
+  var step=(w-2*pad)/Math.max(labels.length,1), bw=step*0.6;
+  labels.forEach(function(lab,i){ var x=pad+i*step+(step-bw)/2; var bh=(values[i]/max)*(h-2*pad); ctx.fillRect(x, h-pad-bh, bw, bh); });
+  ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--fg'); ctx.font='12px sans-serif'; ctx.textAlign='center';
+  labels.forEach(function(lab,i){ var x=pad+i*step+step/2; ctx.fillText(lab.slice(0,10), x, h-pad+14); });
+}
+function drawCommitteeChart(rows){
+  var c=document.getElementById('chartCommittee'); var ctx=prepCanvas(c); var w=c.clientWidth, h=c.clientHeight; var cx=w/2, cy=h/2, R=Math.min(cx,cy)-10;
+  ctx.clearRect(0,0,w,h);
+  var counts={}; rows.forEach(function(r){ var k=r.committee||'نامشخص'; counts[k]=(counts[k]||0)+1; });
+  var labels=Object.keys(counts), values=labels.map(function(k){return counts[k]}); var total=values.reduce(function(a,b){return a+b},0)||1;
+  var start=-Math.PI/2; var acc=getComputedStyle(document.body).getPropertyValue('--accent'), acc2=getComputedStyle(document.body).getPropertyValue('--accent2');
+  labels.forEach(function(lab,i){ var frac=values[i]/total, ang=frac*2*Math.PI; var col=i%2?acc:acc2; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.fillStyle=col; ctx.arc(cx,cy,R,start,start+ang); ctx.closePath(); ctx.fill(); start+=ang; });
+}
+function drawTimelineChart(rows){
+  var c=document.getElementById('chartTimeline'); var ctx=prepCanvas(c); var w=c.clientWidth, h=c.clientHeight, pad=30;
+  ctx.clearRect(0,0,w,h);
+  var map={}; rows.forEach(function(r){ var d=r.jDate||''; if(!d) return; map[d]=(map[d]||0)+1; });
+  var labels=Object.keys(map).sort(function(a,b){ var pa=parseJalali(a), pb=parseJalali(b); var ka=pa?pa[0]*10000+pa[1]*100+pa[2]:0, kb=pb?pb[0]*10000+pb[1]*100+pb[2]:0; return ka-kb; });
+  var values=labels.map(function(k){return map[k]}); var max=Math.max(1, values.length?Math.max.apply(null,values):1);
+  ctx.strokeStyle='rgba(255,255,255,.15)'; for(var y=0;y<=4;y++){ var yy=h-pad-(y/4)*(h-2*pad); ctx.beginPath(); ctx.moveTo(pad,yy); ctx.lineTo(w-pad,yy); ctx.stroke(); }
+  ctx.strokeStyle=getComputedStyle(document.body).getPropertyValue('--accent'); ctx.lineWidth=2; ctx.beginPath();
+  labels.forEach(function(lab,i){ var x=pad+(i/Math.max(labels.length-1,1))*(w-2*pad); var y=h-pad-(values[i]/max)*(h-2*pad); if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); });
+  ctx.stroke(); ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--accent2');
+  labels.forEach(function(lab,i){ var x=pad+(i/Math.max(labels.length-1,1))*(w-2*pad); var y=h-pad-(values[i]/max)*(h-2*pad); ctx.beginPath(); ctx.arc(x,y,3,0,Math.PI*2); ctx.fill(); });
+}
+</script>
+</body>
+</html>
